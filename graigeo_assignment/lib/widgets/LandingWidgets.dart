@@ -73,21 +73,43 @@ class CategoryList extends StatelessWidget {
   }
 }
 
-class BottomNavigator extends StatelessWidget {
+class LandingAppBar extends StatelessWidget implements PreferredSizeWidget {
+  Size get preferredSize => const Size.fromHeight(100);
+  final List tabs;
+  LandingAppBar(this.tabs);
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: ButtonBar(
-        alignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          IconButton(icon: Icon(Icons.title), onPressed: () {}),
-          IconButton(icon: Icon(Icons.title), onPressed: () {}),
-          IconButton(icon: Icon(Icons.favorite_border), onPressed: () {
-            Navigator.pushNamed(context, '/heart');
-          })
-        ],
+    return AppBar(
+      backgroundColor: Colors.white,
+      title: Text(
+        'GraiGeo',
+        textAlign: TextAlign.left,
+        style: TextStyle(
+            color: Color.fromRGBO(0, 0, 0, 1),
+            fontFamily: 'Poppins',
+            fontSize: 20,
+            letterSpacing: -0.23999999463558197,
+            fontWeight: FontWeight.normal,
+            height: 1),
       ),
+      bottom: TabBar(
+        indicatorColor: Colors.black,
+        indicatorSize: TabBarIndicatorSize.label,
+        // isScrollable: true,
+        tabs: tabs.length > 1 ? tabs
+            .map((tabName) => Container(
+                  alignment: Alignment.center,
+                  width: 80,
+                  child: Text(
+                    tabName,
+                    style: TextStyle(color: Colors.black, fontSize: 14),
+                  ),
+                ))
+            .toList() : [],
+      ),
+      iconTheme: IconThemeData(color: Colors.black),
     );
   }
 }
+

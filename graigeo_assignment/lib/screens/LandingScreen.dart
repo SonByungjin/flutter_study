@@ -1,65 +1,88 @@
 import 'package:flutter/material.dart';
 import 'package:graigeo_assignment/widgets/LandingWidgets.dart';
+import 'package:graigeo_assignment/widgets/Swiper.dart';
 
-class LandingScreen extends StatelessWidget {
+class LandingScreen extends StatefulWidget {
+  @override
+  _LandingScreenState createState() => _LandingScreenState();
+}
+
+class _LandingScreenState extends State<LandingScreen> {
+  int currentTab = 1;
+  Map appBarConstant = {
+    0: [],
+    1: ['상품', '카테고리'],
+    2: ['찜한 상품', '최근 본 상품']
+  };
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: DefaultTabController(
-        length: 2,
+        length: currentTab == 0 ? 0 : 2,
         child: Scaffold(
           resizeToAvoidBottomInset: true,
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            title:
-                Text(
-              'GraiGeo',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  color: Color.fromRGBO(0, 0, 0, 1),
-                  fontFamily: 'Poppins',
-                  fontSize: 20,
-                  letterSpacing: -0.23999999463558197,
-                  fontWeight: FontWeight.normal,
-                  height: 1),
-            ),
-            bottom: TabBar(
-              indicatorColor: Colors.black,
-              indicatorSize: TabBarIndicatorSize.label,
-              // isScrollable: true,
-              tabs: [
+          appBar: LandingAppBar(appBarConstant[currentTab]),
+          body: IndexedStack(
+            children: [
+              SwiperWidget(),
+              TabBarView(
+                children: [
+                  ProductsList(),
+                  CategoryList(),
+                ],
+              ),
+              TabBarView(children: [
                 Container(
-                  alignment: Alignment.center,
-                  width: 80,
-                  child: Text(
-                    '상 품',
-                    style: TextStyle(color: Colors.black, fontSize: 14),
-                  ),
+                  color: Colors.greenAccent.shade100,
                 ),
                 Container(
-                  alignment: Alignment.center,
-                  width: 80,
-                  child: Text(
-                    '카테고리',
-                    style: TextStyle(color: Colors.black, fontSize: 14),
-                  ),
+                  color: Colors.pink.shade50,
                 )
-              ],
-            ),
-            iconTheme: IconThemeData(color: Colors.black),
-          ),
-          body: TabBarView(
-            children: [
-              ProductsList(),
-              CategoryList(),
+              ]),
             ],
+            index: currentTab,
           ),
           drawer: Drawer(
             child: Container(
               color: Colors.redAccent.shade100,
             ),
           ),
-          bottomNavigationBar: BottomNavigator(),
+          bottomNavigationBar: BottomNavigationBar(
+            onTap: (index) {
+              setState(() {
+                currentTab = index;
+              });
+            },
+            currentIndex: currentTab,
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.grid_view,
+                  color: currentTab == 0
+                      ? Color.fromRGBO(247, 50, 78, 1)
+                      : Colors.grey.shade400,
+                ),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.ac_unit_rounded,
+                    color: currentTab == 1
+                        ? Color.fromRGBO(247, 50, 78, 1)
+                        : Colors.grey.shade400,
+                  ),
+                  label: ''),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    currentTab == 2 ? Icons.favorite : Icons.favorite_border,
+                    color: currentTab == 2
+                        ? Color.fromRGBO(247, 50, 78, 1)
+                        : Colors.grey.shade400,
+                  ),
+                  label: ''),
+            ],
+          ),
         ),
       ),
     );
