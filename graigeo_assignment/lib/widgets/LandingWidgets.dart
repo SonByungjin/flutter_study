@@ -83,7 +83,9 @@ class BottomNavigator extends StatelessWidget {
         children: [
           IconButton(icon: Icon(Icons.title), onPressed: () {}),
           IconButton(icon: Icon(Icons.title), onPressed: () {}),
-          IconButton(icon: Icon(Icons.title), onPressed: () {})
+          IconButton(icon: Icon(Icons.favorite_border), onPressed: () {
+            Navigator.pushNamed(context, '/heart');
+          })
         ],
       ),
     );
