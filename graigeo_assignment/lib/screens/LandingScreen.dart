@@ -41,7 +41,7 @@ class _LandingScreenState extends State<LandingScreen> {
                     ],
                   ),
                   TabBarView(children: [
-                    HeartWidget(),
+                    HeartScreen(),
                     Container(
                       color: Colors.pink.shade50,
                     )

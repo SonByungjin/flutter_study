@@ -22,5 +22,15 @@ class MyApp extends StatelessWidget {
 }
 
 class ProviderHeart extends ChangeNotifier {
-  List heatProducts = [];
+  List heatProducts = ['아이폰'];
+
+  void addProds(newProd){
+    heatProducts.add(newProd);
+    notifyListeners();
+  }
+
+  void removeProd (newProd) {
+    heatProducts.removeWhere((element) => element == newProd);
+    notifyListeners();
+  }
 }
