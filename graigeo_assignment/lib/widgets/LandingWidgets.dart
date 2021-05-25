@@ -67,8 +67,29 @@ class ProductsList extends StatelessWidget {
 class CategoryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.amber.shade100,
+    return Stack(
+        children: [
+          Container(
+            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ]
+            ),
+            child: Expanded(
+              child: GridView.count(
+                crossAxisCount: 4, 
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                children: List.filled(10, Container(color: Colors.brown.shade100,),),),),
+          )],
     );
   }
 }
@@ -94,7 +115,7 @@ class LandingAppBar extends StatelessWidget implements PreferredSizeWidget {
             height: 1),
       ),
       bottom: TabBar(
-        indicatorColor: Colors.black,
+        indicatorColor: tabs.length > 1 ? Colors.black : Colors.transparent,
         indicatorSize: TabBarIndicatorSize.label,
         // isScrollable: true,
         tabs: tabs.length > 1 ? tabs
@@ -106,7 +127,9 @@ class LandingAppBar extends StatelessWidget implements PreferredSizeWidget {
                     style: TextStyle(color: Colors.black, fontSize: 14),
                   ),
                 ))
-            .toList() : [],
+            .toList() : [
+              Container(color: Colors.transparent)
+            ],
       ),
       iconTheme: IconThemeData(color: Colors.black),
     );
