@@ -1,21 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:graigeo_assignment/main.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graigeo_assignment/bloc/heart_bloc.dart';
+import 'package:graigeo_assignment/bloc/heart_event.dart';
+import 'package:graigeo_assignment/bloc/heart_state.dart';
 
-class HeartScreen extends StatelessWidget {
+class HeartScreen extends StatefulWidget {
+  @override
+  _HeartScreenState createState() => _HeartScreenState();
+}
+
+class _HeartScreenState extends State<HeartScreen> {
   @override
   Widget build(BuildContext context) {
-    final heartlist = Provider.of<ProviderHeart>(context).heatProducts;
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: heartlist.map((el) {
-          return Text(
-            el,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50),
+    return BlocBuilder<HeartBloc, HeartState>(
+      builder: (_, state) {
+        if (state is Empty) {
+          return Container();
+        } else if (state is Error) {
+          return Text(state.message);
+        } else if (state is Loading) {
+          return Center(child: CircularProgressIndicator());
+        } else if (state is Loaded) {
+          final heartList = state.hearts;
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: heartList.map((el) {
+                return Text(
+                  el,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50),
+                );
+              }).toList(),
+            ),
           );
-        }).toList(),
-      ),
+        }
+        return Container();
+      },
     );
   }
 }
