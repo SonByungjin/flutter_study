@@ -20,7 +20,8 @@ class _ProductsListState extends State<ProductsList> {
     '애플',
     '맥북',
     '전원',
-    '포스트잇'
+    '포스트잇',
+    'vscode'
   ];
 
   @override
