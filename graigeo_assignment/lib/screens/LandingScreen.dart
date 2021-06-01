@@ -20,6 +20,7 @@ class _LandingScreenState extends State<LandingScreen> {
   };
 
 
+  // 초기값을 가져오기위해 한번 실행해준다
   @override
   void initState() {
     super.initState();

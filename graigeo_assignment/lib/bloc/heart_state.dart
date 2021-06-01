@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
+// bloc 에서 받는 state 값 정의
 @immutable
 abstract class HeartState extends Equatable {}
 

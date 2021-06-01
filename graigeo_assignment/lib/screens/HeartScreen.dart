@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graigeo_assignment/bloc/heart_bloc.dart';
-import 'package:graigeo_assignment/bloc/heart_event.dart';
 import 'package:graigeo_assignment/bloc/heart_state.dart';
 
 class HeartScreen extends StatefulWidget {
@@ -12,6 +11,8 @@ class HeartScreen extends StatefulWidget {
 class _HeartScreenState extends State<HeartScreen> {
   @override
   Widget build(BuildContext context) {
+    // 위젯 다시 빌드 되지 않고 해당 ui 만 바뀐다
+    print('하트 스크린 빌드');
     return BlocBuilder<HeartBloc, HeartState>(
       builder: (_, state) {
         if (state is Empty) {
@@ -21,6 +22,7 @@ class _HeartScreenState extends State<HeartScreen> {
         } else if (state is Loading) {
           return Center(child: CircularProgressIndicator());
         } else if (state is Loaded) {
+          print('로딩완료 찜한 상품');
           final heartList = state.hearts;
           return Center(
             child: Column(
