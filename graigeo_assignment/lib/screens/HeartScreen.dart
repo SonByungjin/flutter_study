@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:graigeo_assignment/bloc/heart_bloc.dart';
-import 'package:graigeo_assignment/bloc/heart_event.dart';
+import 'package:graigeo_assignment/bloc/heart_cubit.dart';
 import 'package:graigeo_assignment/bloc/heart_state.dart';
 
 class HeartScreen extends StatefulWidget {
@@ -12,7 +11,7 @@ class HeartScreen extends StatefulWidget {
 class _HeartScreenState extends State<HeartScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HeartBloc, HeartState>(
+    return BlocBuilder<HeartCubit, HeartState>(
       builder: (_, state) {
         if (state is Empty) {
           return Container();

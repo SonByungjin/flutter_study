@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graigeo_assignment/bloc/heart_bloc.dart';
+import 'package:graigeo_assignment/bloc/heart_cubit.dart';
 import 'package:graigeo_assignment/repository/heartRepository.dart';
 import 'package:graigeo_assignment/routes.dart';
 
@@ -17,7 +18,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => HeartBloc(HeartRepository()),
+      create: (_) => HeartCubit(HeartRepository()),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
