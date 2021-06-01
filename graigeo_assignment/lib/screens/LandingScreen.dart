@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graigeo_assignment/bloc/heart_cubit.dart';
 import 'package:graigeo_assignment/screens/HeartScreen.dart';
 import 'package:graigeo_assignment/widgets/LandingWidgets.dart';
 import 'package:graigeo_assignment/widgets/Swiper.dart';
@@ -16,6 +18,13 @@ class _LandingScreenState extends State<LandingScreen> {
     2: ['찜한 상품', '최근 본 상품']
   };
 
+
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<HeartCubit>(context).listHeart();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -23,7 +32,7 @@ class _LandingScreenState extends State<LandingScreen> {
         length: currentTab == 0 ? 1 : 2,
         child: Builder(
           builder: (BuildContext context) {
-            final TabController tabControll = DefaultTabController.of(context);
+            final TabController tabControl = DefaultTabController.of(context);
             return Scaffold(
               resizeToAvoidBottomInset: true,
               appBar: LandingAppBar(appBarConstant[currentTab]),
@@ -58,7 +67,7 @@ class _LandingScreenState extends State<LandingScreen> {
                 onTap: (index) {
                   setState(() {
                     currentTab = index;
-                    tabControll.index = 0;
+                    tabControl.index = 0;
                   });
                 },
                 currentIndex: currentTab,
