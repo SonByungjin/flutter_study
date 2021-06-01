@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graigeo_assignment/bloc/heart_bloc.dart';
+import 'package:graigeo_assignment/repository/heartRepository.dart';
 import 'package:graigeo_assignment/routes.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ProviderHeart>(
-      create: (context) => ProviderHeart(),
+    return BlocProvider(
+      create: (_) => HeartBloc(HeartRepository()),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
@@ -18,19 +25,5 @@ class MyApp extends StatelessWidget {
         routes: routes,
       ),
     );
-  }
-}
-
-class ProviderHeart extends ChangeNotifier {
-  List heatProducts = ['아이폰'];
-
-  void addProds(newProd){
-    heatProducts.add(newProd);
-    notifyListeners();
-  }
-
-  void removeProd (newProd) {
-    heatProducts.removeWhere((element) => element == newProd);
-    notifyListeners();
   }
 }
