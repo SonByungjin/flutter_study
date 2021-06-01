@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:graigeo_assignment/bloc/heart_bloc.dart';
-import 'package:graigeo_assignment/bloc/heart_event.dart';
+import 'package:graigeo_assignment/bloc/heart_cubit.dart';
 import 'package:graigeo_assignment/screens/HeartScreen.dart';
 import 'package:graigeo_assignment/widgets/LandingWidgets.dart';
 import 'package:graigeo_assignment/widgets/Swiper.dart';
@@ -23,7 +22,7 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<HeartBloc>(context).add(ListHeartEvent());
+    BlocProvider.of<HeartCubit>(context).listHeart();
   }
 
   @override

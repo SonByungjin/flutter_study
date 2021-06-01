@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:graigeo_assignment/bloc/heart_bloc.dart';
-import 'package:graigeo_assignment/bloc/heart_event.dart';
+import 'package:graigeo_assignment/bloc/heart_cubit.dart';
 import 'package:graigeo_assignment/bloc/heart_state.dart';
 
 class ProductsList extends StatefulWidget {
@@ -26,7 +25,7 @@ class _ProductsListState extends State<ProductsList> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HeartBloc, HeartState>(
+    return BlocBuilder<HeartCubit, HeartState>(
       builder: (_, state) {
         if (state is Empty) {
           return Container();
@@ -81,10 +80,8 @@ class _ProductsListState extends State<ProductsList> {
                             child: InkWell(
                               onTap: () {
                                 isHeart == 'none'
-                                  ? BlocProvider.of<HeartBloc>(context)
-                                      .add(CreateHeartEvent(el))
-                                   : BlocProvider.of<HeartBloc>(context)
-                                      .add(DeleteHeartEvent(el));
+                                  ? context.read<HeartCubit>().createHeart(el)
+                                   : context.read<HeartCubit>().deleteHeart(el);
                               },
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
