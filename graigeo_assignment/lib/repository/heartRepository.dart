@@ -1,21 +1,20 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// 데이터 저장소이자 서버 통신이 이루어지는 곳
 class HeartRepository {
   Future<List<String>> listHeart() async{
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(seconds: 3));
 
     return ['아이폰'];
   }
 
-  Future<String> createHeart(String heartItem) async {
-    await Future.delayed(Duration(seconds: 1));
+  Future<List<String>> createHeart(List<String> prevState, String heartItem) async {
 
-    return heartItem;
+    return [...prevState, heartItem];
   }
 
-  Future<String> deleteHeart(String heartItem) async {
-    await Future.delayed(Duration(seconds: 1));
+  Future<List<String>> deleteHeart(List<String> prevState, String heartItem) async {
 
-    return heartItem;
+    return prevState.where((heart) => heart != heartItem).toList();
   }
 }

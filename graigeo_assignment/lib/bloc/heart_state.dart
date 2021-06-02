@@ -1,5 +1,6 @@
 abstract class HeartState {}
 
+// bloc 에서 받는 state 값 정의
 class Empty extends HeartState {}
 
 class Loading extends HeartState {}

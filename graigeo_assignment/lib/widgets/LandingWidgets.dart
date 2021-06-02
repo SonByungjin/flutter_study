@@ -20,11 +20,12 @@ class _ProductsListState extends State<ProductsList> {
     '애플',
     '맥북',
     '전원',
-    '포스트잇'
+    '포스트잇',
   ];
 
   @override
   Widget build(BuildContext context) {
+    print('상품 스크린 빌드');
     return BlocBuilder<HeartBloc, HeartState>(
       builder: (_, state) {
         if (state is Empty) {
@@ -79,11 +80,15 @@ class _ProductsListState extends State<ProductsList> {
                           Expanded(
                             child: InkWell(
                               onTap: () {
+                                // 이벤트를 호출하는 두가지 방식이 있다 BlocProvider / context.read
+                                // isHeart == 'none'
+                                //   ? BlocProvider.of<HeartBloc>(context)
+                                //       .add(CreateHeartEvent(el))
+                                //    : BlocProvider.of<HeartBloc>(context)
+                                //       .add(DeleteHeartEvent(el));
                                 isHeart == 'none'
-                                  ? BlocProvider.of<HeartBloc>(context)
-                                      .add(CreateHeartEvent(el))
-                                   : BlocProvider.of<HeartBloc>(context)
-                                      .add(DeleteHeartEvent(el));
+                                    ? context.read<HeartBloc>().add(CreateHeartEvent(el))
+                                    : context.read<HeartBloc>().add(DeleteHeartEvent(el));
                               },
                               child: Container(
                                 width: MediaQuery.of(context).size.width,

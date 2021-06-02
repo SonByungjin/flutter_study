@@ -8,6 +8,7 @@ class HeartBloc extends Bloc<HeartEvent, HeartState> {
 
   HeartBloc(this.repository): super(Empty());
 
+  // event 와 state 연결해준다
   @override
   Stream<HeartState> mapEventToState(HeartEvent event) async* {
     if(event is ListHeartEvent) {
@@ -19,15 +20,16 @@ class HeartBloc extends Bloc<HeartEvent, HeartState> {
     }
   }
 
+  // stream 으로 정의해야 ui 에서 받을 수 있다.
+  // repository 를 별도로 쓰지 않는 경우 stream builder 만으로도 bloc 패턴을 구현하는 경우가 있다
   Stream<HeartState> _mapListHeartEvent(ListHeartEvent event) async* {
     try {
       yield Loading();
 
+      // 서버 통신 (repository) 연결;
       final response = await this.repository.listHeart();
 
-      final hearts = response;
-
-      yield Loaded(hearts);
+      yield Loaded(response);
 
     } catch (e) {
       yield Error(e.message);
@@ -36,15 +38,14 @@ class HeartBloc extends Bloc<HeartEvent, HeartState> {
 
   Stream<HeartState> _mapCreateHeartEvent(CreateHeartEvent event) async* {
     try {
+      // yield 된 모든 값은 state 로 가져올 수 있다
       if(state is Loaded) {
         final parsedState = (state as Loaded);
 
-        final newHeart = event.item;
+        final respHearts =  await repository.createHeart(parsedState.hearts ,event.item);
 
-        final prevHearts = [...parsedState.hearts];
-        final newHearts = [...prevHearts, newHeart];
+        yield Loaded(respHearts);
 
-        yield Loaded(newHearts);
       }
     } catch (e) {
       yield Error(e.message);
@@ -54,14 +55,12 @@ class HeartBloc extends Bloc<HeartEvent, HeartState> {
   Stream<HeartState> _mapDeleteHeartEvent(DeleteHeartEvent event) async* {
     try {
       if(state is Loaded) {
-        final newHearts = (state as Loaded)
-            .hearts
-            .where((heart) => heart != event.item)
-            .toList();
+        final parsedState = (state as Loaded);
 
-        yield Loaded(newHearts);
+        final respHearts = await repository.deleteHeart(parsedState.hearts, event.item);
 
-        await repository.deleteHeart(event.item);
+        yield Loaded(respHearts);
+
       }
     } catch (e) {
       yield Error(e.message);
