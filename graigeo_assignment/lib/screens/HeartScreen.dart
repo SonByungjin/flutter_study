@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graigeo_assignment/bloc/bloc_cubit.dart';
 import 'package:graigeo_assignment/bloc/heart_bloc.dart';
 import 'package:graigeo_assignment/bloc/heart_state.dart';
 
@@ -13,7 +14,7 @@ class _HeartScreenState extends State<HeartScreen> {
   Widget build(BuildContext context) {
     // 위젯 다시 빌드 되지 않고 해당 ui 만 바뀐다
     print('하트 스크린 빌드');
-    return BlocBuilder<HeartBloc, HeartState>(
+    return BlocBuilder<HeartCubit, HeartState>(
       builder: (_, state) {
         if (state is Empty) {
           return Container();

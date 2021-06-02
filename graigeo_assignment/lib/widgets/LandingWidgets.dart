@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graigeo_assignment/bloc/bloc_cubit.dart';
 import 'package:graigeo_assignment/bloc/heart_bloc.dart';
 import 'package:graigeo_assignment/bloc/heart_event.dart';
 import 'package:graigeo_assignment/bloc/heart_state.dart';
@@ -26,7 +27,7 @@ class _ProductsListState extends State<ProductsList> {
   @override
   Widget build(BuildContext context) {
     print('상품 스크린 빌드');
-    return BlocBuilder<HeartBloc, HeartState>(
+    return BlocBuilder<HeartCubit, HeartState>(
       builder: (_, state) {
         if (state is Empty) {
           return Container();
@@ -87,8 +88,8 @@ class _ProductsListState extends State<ProductsList> {
                                 //    : BlocProvider.of<HeartBloc>(context)
                                 //       .add(DeleteHeartEvent(el));
                                 isHeart == 'none'
-                                    ? context.read<HeartBloc>().add(CreateHeartEvent(el))
-                                    : context.read<HeartBloc>().add(DeleteHeartEvent(el));
+                                    ? context.read<HeartCubit>().createHeart(el)
+                                    : context.read<HeartCubit>().deleteHeart(el);
                               },
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
