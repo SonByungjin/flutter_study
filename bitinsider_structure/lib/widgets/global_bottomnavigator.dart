@@ -1,8 +1,8 @@
-import 'package:bitinsider_structure/screen/home/LandingScreen.dart';
-import 'package:bitinsider_structure/screen/home/MessageScreen.dart';
-import 'package:bitinsider_structure/screen/home/NoticeScreen.dart';
-import 'package:bitinsider_structure/screen/home/PopularScreen.dart';
-import 'package:bitinsider_structure/screen/home/PriceScreen.dart';
+import 'package:bitinsider_structure/screens/home/home_screen.dart';
+import 'package:bitinsider_structure/screens/message/message_screen.dart';
+import 'package:bitinsider_structure/screens/notice/notice_screen.dart';
+import 'package:bitinsider_structure/screens/popular/popular_screen.dart';
+import 'package:bitinsider_structure/screens/price/price_screen.dart';
 import 'package:flutter/material.dart';
 
 class GlobalBottomNav extends StatelessWidget {
@@ -48,7 +48,7 @@ class GlobalBottomNav extends StatelessWidget {
               ),
               activeIcon: Icon(
                 icon,
-                color: selectedIdx > 0 ? Colors.red : Colors.grey,
+                color: selectedIdx >= 0 ? Colors.red : Colors.grey,
               ),
               label: ''))
           .toList(),

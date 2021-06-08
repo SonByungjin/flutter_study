@@ -1,5 +1,5 @@
-import 'package:bitinsider_structure/widgets/GlabalDrawer.dart';
-import 'package:bitinsider_structure/widgets/GlobalBottomNav.dart';
+import 'package:bitinsider_structure/widgets/global_drawer.dart';
+import 'package:bitinsider_structure/widgets/global_bottomnavigator.dart';
 import 'package:flutter/material.dart';
 
 class PriceScreen extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:bitinsider_structure/screen/home/LandingScreen.dart';
-import 'package:bitinsider_structure/screen/mypage/MypageScreen.dart';
-import 'package:bitinsider_structure/screen/setting/SettingScreen.dart';
+import 'package:bitinsider_structure/screens/home/home_screen.dart';
+import 'package:bitinsider_structure/screens/mypage/mypage_screen.dart';
+import 'package:bitinsider_structure/screens/setting/setting_screen.dart';
 
 final routes = {
   '/': (BuildContext context) => LandingScreen(),
