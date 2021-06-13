@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/caculate_textslider/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/caculate_textslider/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flashcard/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flashcard/build" />
+      <excludeFolder url="file://$MODULE_DIR$/graigeo_assignment/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/graigeo_assignment/build" />
+      <excludeFolder url="file://$MODULE_DIR$/routes_practice/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/routes_practice/build" />
+      <excludeFolder url="file://$MODULE_DIR$/webview_demo/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/webview_demo/build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
