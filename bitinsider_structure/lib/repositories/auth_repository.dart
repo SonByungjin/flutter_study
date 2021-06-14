@@ -1,7 +1,25 @@
 class AuthRepository {
-  Future<String> receiveAuth() async{
-    await Future.delayed(Duration(seconds: 3));
+  Map userInfo = {
+    'ID' : '',
+    'PASSWORD': '',
+  };
 
-    return 'test';
+  Future<Map> currentUser() async {
+
+    return userInfo;
+  }
+
+  Future<Map> resisterUser(String id, String pw) async {
+    userInfo['ID'] = id;
+    userInfo['PASSWORD'] = pw;
+
+    return userInfo;
+  }
+
+  Future<Map> removeUser() async {
+    userInfo['ID'] = '';
+    userInfo['PASSWORD'] = '';
+
+    return userInfo;
   }
 }

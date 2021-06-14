@@ -14,7 +14,7 @@ class _MypageScreenState extends State<MypageScreen> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<AuthBloc>(context).add(SendAuth());
+    BlocProvider.of<AuthBloc>(context).add(ReceiveAuth());
   }
 
   @override

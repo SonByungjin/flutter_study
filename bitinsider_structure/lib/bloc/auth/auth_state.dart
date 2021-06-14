@@ -3,9 +3,9 @@ abstract class AuthState {}
 class Loading extends AuthState {}
 
 class Loaded extends AuthState {
-  final String test;
+  final Map userInfo;
 
-  Loaded(this.test);
+  Loaded(this.userInfo);
 }
 
 class Error extends AuthState {

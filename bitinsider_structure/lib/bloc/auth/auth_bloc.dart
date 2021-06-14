@@ -10,18 +10,39 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>{
 
   @override
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
-    if(event is SendAuth) {
+    if(event is ReceiveAuth) {
       try {
         yield Loading();
 
-        final response = await this.repository.receiveAuth();
+        final response = await this.repository.currentUser();
 
         yield Loaded(response);
 
       } catch (e) {
         yield Error(e.message);
       }
+    } else if (event is SendAuth) {
+      try {
+        yield Loading();
+
+        final rsp = await this.repository.resisterUser(event.id, event.pw);
+
+
+        yield Loaded(rsp);
+      } catch (e) {
+        yield Error(e.message);
+      }
+    } else if (event is removeAuth) {
+      try {
+        yield Loading();
+
+        final rsp = await this.repository.removeUser();
+
+
+        yield Loaded(rsp);
+      } catch (e) {
+        yield Error(e.message);
+      }
     }
   }
-
 }
