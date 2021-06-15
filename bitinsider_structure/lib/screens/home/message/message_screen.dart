@@ -4,11 +4,22 @@ import 'package:flutter/material.dart';
 class MessageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final String searchTxt = ModalRoute.of(context).settings.arguments;
     return MyScaffold(
       title: '메시지함',
       bottomIdx: 4,
       body: Center(
-        child: Text('메시지함'),
+        child: Column(
+          children: [
+            Text('메시지함'),
+            TextButton(
+              onPressed: () {
+                print(searchTxt);
+              },
+              child: Text('버튼'),
+            ),
+          ],
+        ),
       ),
     );
   }

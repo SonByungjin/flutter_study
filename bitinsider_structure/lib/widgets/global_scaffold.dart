@@ -21,6 +21,10 @@ class MyScaffold extends StatefulWidget {
 }
 
 class _MyScaffoldState extends State<MyScaffold> {
+
+  TextEditingController appBarSearchCtx = TextEditingController();
+  String searchTxt = '';
+
   List<IconData> homeIcons = [
     Icons.bar_chart,
     Icons.message,
@@ -32,10 +36,13 @@ class _MyScaffoldState extends State<MyScaffold> {
   List<Widget> routeWidgets = [
     PriceScreen(),
     NoticeScreen(),
-    LandingScreen(),
+    LandingScreen(searchTxt),
     PopularScreen(),
     MessageScreen(),
   ];
+
+
+  String get searchText => appBarSearchCtx.text;
 
   String userID = '';
 
@@ -49,6 +56,25 @@ class _MyScaffoldState extends State<MyScaffold> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(60),
+          child: Container(
+            // height: 30,
+            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+            color: Colors.white,
+            child: SizedBox(
+              height: 40,
+              child: TextFormField(
+                initialValue: '',
+                controller: appBarSearchCtx,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  contentPadding: EdgeInsets.all(1)
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
       body: this.widget.body,
       bottomNavigationBar: BottomNavigationBar(
@@ -62,7 +88,6 @@ class _MyScaffoldState extends State<MyScaffold> {
             PageRouteBuilder(
               pageBuilder: (context, ani1, ani2) => routeWidgets[tap],
               transitionDuration: Duration(seconds: 0),
-              settings: RouteSettings(arguments: ''),
             ),
           );
         },
@@ -208,3 +233,5 @@ class _MyScaffoldState extends State<MyScaffold> {
     );
   }
 }
+
+
