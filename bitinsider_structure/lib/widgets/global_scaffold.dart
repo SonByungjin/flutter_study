@@ -1,11 +1,12 @@
 import 'package:bitinsider_structure/bloc/auth/auth_bloc.dart';
 import 'package:bitinsider_structure/bloc/auth/auth_event.dart';
 import 'package:bitinsider_structure/bloc/auth/auth_state.dart';
+import 'package:bitinsider_structure/screens/home/exchange_notice/exchange_notice_screen.dart';
 import 'package:bitinsider_structure/screens/home/landing/Landing_screen.dart';
-import 'package:bitinsider_structure/screens/home/message/message_screen.dart';
-import 'package:bitinsider_structure/screens/home/notice/notice_screen.dart';
 import 'package:bitinsider_structure/screens/home/popular/popular_screen.dart';
 import 'package:bitinsider_structure/screens/home/price/price_screen.dart';
+import 'package:bitinsider_structure/screens/home/public_notice/public_notice_screen.dart';
+import 'package:bitinsider_structure/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,36 +14,36 @@ class MyScaffold extends StatefulWidget {
   final Widget body;
   final String title;
   final int bottomIdx;
+  final TextEditingController appBarSearchCtrl;
+  final ScaffoldType scaffoldType;
 
-  MyScaffold({this.body, this.title, this.bottomIdx});
+  MyScaffold(
+      {this.body,
+      this.title,
+      this.bottomIdx,
+      this.appBarSearchCtrl,
+      this.scaffoldType});
 
   @override
   _MyScaffoldState createState() => _MyScaffoldState();
 }
 
 class _MyScaffoldState extends State<MyScaffold> {
-
-  TextEditingController appBarSearchCtx = TextEditingController();
-  String searchTxt = '';
-
   List<IconData> homeIcons = [
     Icons.bar_chart,
     Icons.message,
     Icons.home_filled,
     Icons.star,
-    Icons.local_post_office
+    Icons.flag_sharp
   ];
 
   List<Widget> routeWidgets = [
     PriceScreen(),
-    NoticeScreen(),
-    LandingScreen(searchTxt),
+    ExchangeNoticeScreen(),
+    LandingScreen(),
     PopularScreen(),
-    MessageScreen(),
+    PublicNoticeScreen(),
   ];
-
-
-  String get searchText => appBarSearchCtx.text;
 
   String userID = '';
 
@@ -57,26 +58,43 @@ class _MyScaffoldState extends State<MyScaffold> {
       appBar: AppBar(
         title: Text(widget.title),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(60),
-          child: Container(
-            // height: 30,
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-            color: Colors.white,
-            child: SizedBox(
-              height: 40,
-              child: TextFormField(
-                initialValue: '',
-                controller: appBarSearchCtx,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  contentPadding: EdgeInsets.all(1)
-                ),
-              ),
-            ),
+          preferredSize: Size.fromHeight(
+              widget.scaffoldType == ScaffoldType.HOME ? 60 : 0),
+          child: Builder(
+            builder: (BuildContext context) {
+              switch (widget.scaffoldType) {
+                case ScaffoldType.HOME:
+                  return Container(
+                    // height: 30,
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    color: Colors.white,
+                    child: SizedBox(
+                      height: 40,
+                      child: TextField(
+                        controller: this.widget.appBarSearchCtrl,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.all(1)),
+                      ),
+                    ),
+                  );
+                case ScaffoldType.SUB:
+                  return Container();
+                case ScaffoldType.ETC:
+                  return Container();
+                default:
+                  return Container();
+              }
+            },
           ),
         ),
       ),
-      body: this.widget.body,
+      // body: this.widget.body,
+      body: Builder(
+        builder: (BuildContext context) {
+          return this.widget.body;
+        },
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: widget.bottomIdx >= 0 ? widget.bottomIdx : 0,
         type: BottomNavigationBarType.fixed,
@@ -93,8 +111,7 @@ class _MyScaffoldState extends State<MyScaffold> {
         },
         items: homeIcons
             .map(
-              (el) =>
-              BottomNavigationBarItem(
+              (el) => BottomNavigationBarItem(
                   activeIcon: Icon(
                     el,
                     color: widget.bottomIdx >= 0 ? Colors.red : Colors.grey,
@@ -104,14 +121,15 @@ class _MyScaffoldState extends State<MyScaffold> {
                     color: Colors.grey,
                   ),
                   label: ''),
-        )
+            )
             .toList(),
       ),
       drawer: Drawer(
         child: BlocBuilder<AuthBloc, AuthState>(
           builder: (_, state) {
-            if(state is Loaded) {
-              userID = state.userInfo['ID'].length > 0 ? state.userInfo['ID'] : '';
+            if (state is Loaded) {
+              userID =
+                  state.userInfo['ID'].length > 0 ? state.userInfo['ID'] : '';
             }
             return Column(
               children: [
@@ -142,12 +160,14 @@ class _MyScaffoldState extends State<MyScaffold> {
                             SizedBox(
                               height: 50,
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment
-                                    .spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    userID.length > 0 ? '$userID님 안녕하세요' : '로그인 해주세요',
+                                    userID.length > 0
+                                        ? '$userID님 안녕하세요'
+                                        : '로그인 해주세요',
                                     style: TextStyle(color: Colors.white),
                                   ),
                                   Row(
@@ -158,8 +178,10 @@ class _MyScaffoldState extends State<MyScaffold> {
                                           style: TextStyle(color: Colors.white),
                                         ),
                                         onTap: () {
-                                          if(userID.length > 0) {
-                                            context.read<AuthBloc>().add(removeAuth());
+                                          if (userID.length > 0) {
+                                            context
+                                                .read<AuthBloc>()
+                                                .add(removeAuth());
                                           }
                                           Navigator.pushNamed(
                                               context, '/login');
@@ -169,7 +191,7 @@ class _MyScaffoldState extends State<MyScaffold> {
                                         width: 20,
                                       ),
                                       Text(
-                                        userID.length > 0 ? '' :'회원가입',
+                                        userID.length > 0 ? '' : '회원가입',
                                         style: TextStyle(color: Colors.white),
                                       ),
                                     ],
@@ -185,6 +207,10 @@ class _MyScaffoldState extends State<MyScaffold> {
                 ),
                 Container(
                   height: 150,
+                  decoration: BoxDecoration(
+                    border: Border.symmetric(
+                        horizontal: BorderSide(width: 1, color: Colors.grey)),
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -198,33 +224,35 @@ class _MyScaffoldState extends State<MyScaffold> {
                     ],
                   ),
                 ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: homeIcons
-                        .map((el) =>
-                        InkWell(
-                          onTap: () {
-                            final routeIdx = homeIcons.indexOf(el);
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder: (context, ani1, ani2) =>
-                                routeWidgets[routeIdx],
-                                transitionDuration: Duration(seconds: 0),
-                              ),
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 50),
-                            child: Row(
-                              children: [Icon(el), Text('')],
-                            ),
-                          ),
-                        ))
-                        .toList(),
-                  ),
-                ),
+                DrawerList()
+                // Expanded(
+                //   child: Column(
+                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //     children: homeIcons
+                //         .map(
+                //           (el) => InkWell(
+                //             onTap: () {
+                //               final routeIdx = homeIcons.indexOf(el);
+                //               Navigator.push(
+                //                 context,
+                //                 PageRouteBuilder(
+                //                   pageBuilder: (context, ani1, ani2) =>
+                //                       routeWidgets[routeIdx],
+                //                   transitionDuration: Duration(seconds: 0),
+                //                 ),
+                //               );
+                //             },
+                //             child: Padding(
+                //               padding: const EdgeInsets.only(left: 50),
+                //               child: Row(
+                //                 children: [Icon(el), Text('')],
+                //               ),
+                //             ),
+                //           ),
+                //         )
+                //         .toList(),
+                //   ),
+                // ),
               ],
             );
           },
@@ -234,4 +262,16 @@ class _MyScaffoldState extends State<MyScaffold> {
   }
 }
 
-
+class DrawerList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        itemCount: 4,
+        itemBuilder: (BuildContext context, int idx) {
+          return Text('?');
+        },
+      ),
+    );
+  }
+}

@@ -2,17 +2,17 @@ import 'package:bitinsider_structure/utils/constant.dart';
 import 'package:bitinsider_structure/widgets/global_scaffold.dart';
 import 'package:flutter/material.dart';
 
-class PriceScreen extends StatelessWidget {
-  final priceScreenSearchCtx = TextEditingController();
+class PublicNoticeScreen extends StatelessWidget {
+  final publicNoticeSeachCtx = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
       scaffoldType: ScaffoldType.HOME,
-      appBarSearchCtrl: priceScreenSearchCtx,
-      title: '실시간 시세',
-      bottomIdx: 0,
+      appBarSearchCtrl: publicNoticeSeachCtx,
+      title: '공시',
+      bottomIdx: 4,
       body: Center(
-        child: Text('실시간 시세'),
+        child: Text('공시'),
       ),
     );
   }

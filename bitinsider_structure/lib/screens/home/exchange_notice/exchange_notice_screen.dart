@@ -1,14 +1,18 @@
+import 'package:bitinsider_structure/utils/constant.dart';
 import 'package:bitinsider_structure/widgets/global_scaffold.dart';
 import 'package:flutter/material.dart';
 
-class NoticeScreen extends StatelessWidget {
+class ExchangeNoticeScreen extends StatelessWidget {
+  final exchangeSearchCtx = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
-      title: '공지사항',
+      scaffoldType: ScaffoldType.HOME,
+      appBarSearchCtrl: exchangeSearchCtx,
+      title: '거래소 공지',
       bottomIdx: 1,
       body: DefaultTabController(
-        length: 3,
+        length: 5,
         child: Builder(
           builder: (BuildContext context) {
             return Column(
@@ -22,11 +26,19 @@ class NoticeScreen extends StatelessWidget {
                         style: TextStyle(color: Colors.black),
                       ),
                       Text(
-                        '안내',
+                        '빗썸',
                         style: TextStyle(color: Colors.black),
                       ),
                       Text(
-                        '이벤트',
+                        '업비트',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      Text(
+                        '바이낸스',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      Text(
+                        '후오비',
                         style: TextStyle(color: Colors.black),
                       ),
                     ],
@@ -39,10 +51,16 @@ class NoticeScreen extends StatelessWidget {
                       child: Text('전체'),
                     ),
                     Center(
-                      child: Text('안내'),
+                      child: Text('빗썸'),
                     ),
                     Center(
-                      child: Text('이벤트'),
+                      child: Text('업비트'),
+                    ),
+                    Center(
+                      child: Text('바이낸스'),
+                    ),
+                    Center(
+                      child: Text('후오비'),
                     ),
                   ],
                 ))

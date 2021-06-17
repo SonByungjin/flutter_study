@@ -1,10 +1,14 @@
+import 'package:bitinsider_structure/utils/constant.dart';
 import 'package:bitinsider_structure/widgets/global_scaffold.dart';
 import 'package:flutter/material.dart';
 
 class PopularScreen extends StatelessWidget {
+  final popularSeachCtx = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
+      scaffoldType: ScaffoldType.HOME,
+      appBarSearchCtrl: popularSeachCtx,
       title: '인기글',
       bottomIdx: 3,
       body: DefaultTabController(
@@ -21,7 +25,7 @@ class PopularScreen extends StatelessWidget {
                       style: TextStyle(color: Colors.black),
                     ),
                     Text(
-                      '업비트',
+                      '비트맨',
                       style: TextStyle(color: Colors.black),
                     ),
                     Text(
@@ -43,7 +47,7 @@ class PopularScreen extends StatelessWidget {
                 child: TabBarView(
                   children: [
                     Center(child: Text('전체')),
-                    Center(child: Text('업비트')),
+                    Center(child: Text('비트맨')),
                     Center(child: Text('코인판')),
                     Center(child: Text('코박')),
                     Test(),
