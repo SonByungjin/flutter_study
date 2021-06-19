@@ -9,7 +9,7 @@ class PopularScreen extends StatelessWidget {
     return MyScaffold(
       scaffoldType: ScaffoldType.HOME,
       appBarSearchCtrl: popularSeachCtx,
-      title: '인기글',
+      title: '인기글 TOP',
       bottomIdx: 3,
       body: DefaultTabController(
         length: 5,

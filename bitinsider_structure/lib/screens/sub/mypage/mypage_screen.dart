@@ -1,5 +1,4 @@
 import 'package:bitinsider_structure/bloc/auth/auth_bloc.dart';
-import 'package:bitinsider_structure/bloc/auth/auth_event.dart';
 import 'package:bitinsider_structure/bloc/auth/auth_state.dart';
 import 'package:bitinsider_structure/widgets/global_scaffold.dart';
 import 'package:flutter/material.dart';
@@ -11,12 +10,6 @@ class MypageScreen extends StatefulWidget {
 }
 
 class _MypageScreenState extends State<MypageScreen> {
-  @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<AuthBloc>(context).add(ReceiveAuth());
-  }
-
   @override
   Widget build(BuildContext context) {
     return MyScaffold(

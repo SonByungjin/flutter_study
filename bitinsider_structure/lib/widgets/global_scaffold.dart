@@ -28,6 +28,8 @@ class MyScaffold extends StatefulWidget {
   _MyScaffoldState createState() => _MyScaffoldState();
 }
 
+const orangeColor = Color(0xffff6440);
+
 class _MyScaffoldState extends State<MyScaffold> {
   List<IconData> homeIcons = [
     Icons.bar_chart,
@@ -48,15 +50,22 @@ class _MyScaffoldState extends State<MyScaffold> {
   String userID = '';
 
   @override
-  // void initState() {
-  //   super.initState();
-  //   BlocProvider.of<AuthBloc>(context).add(ReceiveAuth());
-  // }
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        iconTheme: IconThemeData(color: Colors.grey.shade500),
+        shadowColor: Colors.transparent,
+        backgroundColor: Colors.grey.shade100,
+        title: Text(
+          widget.title,
+          style: TextStyle(color: Colors.black),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: Icon(Icons.sms_outlined),
+          )
+        ],
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(
               widget.scaffoldType == ScaffoldType.HOME ? 60 : 0),
@@ -67,14 +76,33 @@ class _MyScaffoldState extends State<MyScaffold> {
                   return Container(
                     // height: 30,
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-                    color: Colors.white,
                     child: SizedBox(
                       height: 40,
-                      child: TextField(
-                        controller: this.widget.appBarSearchCtrl,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.all(1)),
+                      child: Theme(
+                        data: Theme.of(context)
+                            .copyWith(primaryColor: orangeColor),
+                        child: TextField(
+                          cursorColor: orangeColor,
+                          autofocus: false,
+                          controller: this.widget.appBarSearchCtrl,
+                          decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              prefixIcon: Icon(
+                                Icons.search,
+                              ),
+                              contentPadding: EdgeInsets.only(left: 20),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(50)),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: orangeColor),
+                                borderRadius: BorderRadius.circular(50),
+                              )
+                              // border: OutlineInputBorder(
+                              //   borderRadius: BorderRadius.circular(50),
+                              // ),
+                              ),
+                        ),
                       ),
                     ),
                   );
@@ -89,18 +117,11 @@ class _MyScaffoldState extends State<MyScaffold> {
           ),
         ),
       ),
-      // body: this.widget.body,
-      body: Builder(
-        builder: (BuildContext context) {
-          return this.widget.body;
-        },
-      ),
+      body: this.widget.body,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: widget.bottomIdx >= 0 ? widget.bottomIdx : 0,
         type: BottomNavigationBarType.fixed,
         onTap: (tap) {
-          // final routeName = routeNames[tap];
-          // Navigator.pushNamed(context, '/$routeName');
           Navigator.push(
             context,
             PageRouteBuilder(
@@ -114,7 +135,7 @@ class _MyScaffoldState extends State<MyScaffold> {
               (el) => BottomNavigationBarItem(
                   activeIcon: Icon(
                     el,
-                    color: widget.bottomIdx >= 0 ? Colors.red : Colors.grey,
+                    color: widget.bottomIdx >= 0 ? orangeColor : Colors.grey,
                   ),
                   icon: Icon(
                     el,
@@ -134,70 +155,98 @@ class _MyScaffoldState extends State<MyScaffold> {
             return Column(
               children: [
                 Container(
-                  height: 200,
-                  color: Colors.redAccent,
-                  child: Column(
+                  padding: EdgeInsets.only(top: 30, bottom: 20),
+                  height: 150,
+                  color: orangeColor,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                      Container(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          width: 100,
+                          height: 100,
+                          child: userID.length > 0
+                              ? CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage('assets/profile.png'),
+                                )
+                              : CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                )),
+                      SizedBox(
+                        height: 50,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(context, '/mypage');
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(20),
-                                child: Container(
-                                  width: 60,
-                                  height: 60,
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.amber,
-                                  ),
-                                ),
-                              ),
+                            Text(
+                              userID.length > 0 ? '$userID' : '로그인 해주세요',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16),
                             ),
-                            SizedBox(
-                              height: 50,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    userID.length > 0
-                                        ? '$userID님 안녕하세요'
-                                        : '로그인 해주세요',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  Row(
+                            Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    if (userID.length > 0) {
+                                      Navigator.pushNamed(context, '/myPage');
+                                    } else {
+                                      Navigator.pushNamed(context, '/login');
+                                    }
+                                  },
+                                  child: Row(
                                     children: [
-                                      InkWell(
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 4),
                                         child: Text(
-                                          userID.length > 0 ? '로그아웃' : '로그인',
+                                          userID.length > 0 ? '마이페이지' : '로그인',
                                           style: TextStyle(color: Colors.white),
                                         ),
-                                        onTap: () {
-                                          if (userID.length > 0) {
-                                            context
-                                                .read<AuthBloc>()
-                                                .add(removeAuth());
-                                          }
-                                          Navigator.pushNamed(
-                                              context, '/login');
-                                        },
                                       ),
-                                      SizedBox(
-                                        width: 20,
-                                      ),
-                                      Text(
-                                        userID.length > 0 ? '' : '회원가입',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
+                                      Icon(
+                                        Icons.arrow_forward_ios_outlined,
+                                        color: Colors.white,
+                                        size: 12,
+                                      )
                                     ],
-                                  )
-                                ],
-                              ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    if (userID.length > 0) {
+                                      context
+                                          .read<AuthBloc>()
+                                          .add(removeAuth());
+                                      Navigator.pushNamed(context, '/');
+                                    } else {
+                                      Navigator.pushNamed(context, '/login');
+                                    }
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 4),
+                                        child: Text(
+                                          userID.length > 0 ? '로그아웃' : '회원가입',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.arrow_forward_ios_outlined,
+                                        color: Colors.white,
+                                        size: 12,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
                             )
                           ],
                         ),
@@ -206,53 +255,60 @@ class _MyScaffoldState extends State<MyScaffold> {
                   ),
                 ),
                 Container(
-                  height: 150,
+                  padding: EdgeInsets.symmetric(vertical: 16),
                   decoration: BoxDecoration(
-                    border: Border.symmetric(
-                        horizontal: BorderSide(width: 1, color: Colors.grey)),
+                    border: Border(
+                        bottom: BorderSide(width: 1, color: Colors.grey)),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Icon(Icons.wb_sunny_outlined),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircleAvatar(
+                            child: Center(
+                              child: Image.asset('assets/icon_bit_white.png'),
+                            ),
+                            backgroundColor: orangeColor,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4),
+                            child: Text(
+                              '비트인싸 공지',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          )
+                        ],
+                      ),
                       InkWell(
-                        child: Icon(Icons.settings),
-                        onTap: () {
+                        onTap: (){
                           Navigator.pushNamed(context, '/setting');
                         },
-                      ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                              child: Center(
+                                child:
+                                    Image.asset('assets/icon_setting_white.png'),
+                              ),
+                              backgroundColor: orangeColor,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 4),
+                              child: Text(
+                                '환경설정',
+                                style: TextStyle(fontSize: 12),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ),
-                DrawerList()
-                // Expanded(
-                //   child: Column(
-                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //     children: homeIcons
-                //         .map(
-                //           (el) => InkWell(
-                //             onTap: () {
-                //               final routeIdx = homeIcons.indexOf(el);
-                //               Navigator.push(
-                //                 context,
-                //                 PageRouteBuilder(
-                //                   pageBuilder: (context, ani1, ani2) =>
-                //                       routeWidgets[routeIdx],
-                //                   transitionDuration: Duration(seconds: 0),
-                //                 ),
-                //               );
-                //             },
-                //             child: Padding(
-                //               padding: const EdgeInsets.only(left: 50),
-                //               child: Row(
-                //                 children: [Icon(el), Text('')],
-                //               ),
-                //             ),
-                //           ),
-                //         )
-                //         .toList(),
-                //   ),
-                // ),
+                DrawerList(),
               ],
             );
           },
@@ -263,13 +319,72 @@ class _MyScaffoldState extends State<MyScaffold> {
 }
 
 class DrawerList extends StatelessWidget {
+  final List<Map> drawerConstant = [
+    {'text': '홈', 'navigator': '', 'icon': Icons.home_outlined},
+    {
+      'text': '실시간 시세',
+      'navigator': 'price',
+      'icon': Icons.stacked_line_chart_rounded
+    },
+    {
+      'text': '거래소 공지',
+      'navigator': 'exchangeNotice',
+      'icon': Icons.message_outlined
+    },
+    {
+      'text': '인기글 TOP',
+      'navigator': 'popular',
+      'icon': Icons.star_border_outlined
+    },
+    {
+      'text': 'NEWS',
+      'navigator': 'news',
+      'icon': Icons.sms_outlined,
+    },
+    {'text': '메시지함', 'navigator': 'message', 'icon': Icons.email_outlined},
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        itemCount: 4,
+        padding: EdgeInsets.all(0),
+        itemCount: 6,
         itemBuilder: (BuildContext context, int idx) {
-          return Text('?');
+          return Container(
+            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+            child: InkWell(
+              onTap: () {
+                Navigator.pushNamed(
+                    context, '/${drawerConstant[idx]['navigator']}');
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 12),
+                        child: Icon(
+                          drawerConstant[idx]['icon'],
+                          color: orangeColor,
+                        ),
+                      ),
+                      Text(
+                        drawerConstant[idx]['text'],
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.w500),
+                      )
+                    ],
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios_outlined,
+                    color: Colors.grey,
+                  ),
+                ],
+              ),
+            ),
+          );
         },
       ),
     );
