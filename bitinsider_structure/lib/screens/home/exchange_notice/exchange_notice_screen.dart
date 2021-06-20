@@ -7,7 +7,7 @@ class ExchangeNoticeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
-      scaffoldType: ScaffoldType.HOME,
+      scaffoldType: ScaffoldType.SEARCH,
       appBarSearchCtrl: exchangeSearchCtx,
       title: '거래소 공지',
       bottomIdx: 1,
@@ -20,27 +20,15 @@ class ExchangeNoticeScreen extends StatelessWidget {
                 SizedBox(
                   height: 50,
                   child: TabBar(
+                    indicatorColor: Colors.redAccent,
+                    labelColor: Colors.redAccent,
+                    unselectedLabelColor: Colors.grey,
                     tabs: [
-                      Text(
-                        '전체',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      Text(
-                        '빗썸',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      Text(
-                        '업비트',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      Text(
-                        '바이낸스',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      Text(
-                        '후오비',
-                        style: TextStyle(color: Colors.black),
-                      ),
+                      Text('전체'),
+                      Text('빗썸'),
+                      Text('업비트'),
+                      Text('바이낸스'),
+                      Text('후오비'),
                     ],
                   ),
                 ),

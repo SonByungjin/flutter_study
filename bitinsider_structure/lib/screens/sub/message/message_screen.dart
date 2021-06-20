@@ -2,17 +2,15 @@ import 'package:bitinsider_structure/utils/constant.dart';
 import 'package:bitinsider_structure/widgets/global_scaffold.dart';
 import 'package:flutter/material.dart';
 
-class PublicNoticeScreen extends StatelessWidget {
-  final publicNoticeSeachCtx = TextEditingController();
+class MessageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
-      scaffoldType: ScaffoldType.SEARCH,
-      appBarSearchCtrl: publicNoticeSeachCtx,
-      title: '공시',
-      bottomIdx: 4,
+      scaffoldType: ScaffoldType.NONE,
+      title: '메시지함',
+      bottomIdx: -1,
       body: Center(
-        child: Text('공시'),
+        child: Text('메시지함'),
       ),
     );
   }

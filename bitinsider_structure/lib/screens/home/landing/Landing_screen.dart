@@ -14,7 +14,7 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
-      scaffoldType: ScaffoldType.HOME,
+      scaffoldType: ScaffoldType.SEARCH,
       title: 'BITINSIDER',
       bottomIdx: 2,
       appBarSearchCtrl: landingScreenSearchCtx,
@@ -27,7 +27,7 @@ class _LandingScreenState extends State<LandingScreen> {
               onPressed: () {
                 print(landingScreenSearchCtx.text);
               },
-              child: Text('버튼'),
+              child: Text('검색 버튼'),
             ),
           ],
         ),

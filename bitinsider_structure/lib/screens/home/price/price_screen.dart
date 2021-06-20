@@ -7,7 +7,7 @@ class PriceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
-      scaffoldType: ScaffoldType.HOME,
+      scaffoldType: ScaffoldType.SEARCH,
       appBarSearchCtrl: priceScreenSearchCtx,
       title: '실시간 시세',
       bottomIdx: 0,

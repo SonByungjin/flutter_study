@@ -1,6 +1,6 @@
 enum ScaffoldType {
-  HOME,
-  SUB,
-  ETC
+  SEARCH,
+  SELECT,
+  NONE
 }
 

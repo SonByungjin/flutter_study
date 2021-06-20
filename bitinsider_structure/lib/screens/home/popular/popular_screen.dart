@@ -7,7 +7,7 @@ class PopularScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
-      scaffoldType: ScaffoldType.HOME,
+      scaffoldType: ScaffoldType.SEARCH,
       appBarSearchCtrl: popularSeachCtx,
       title: '인기글 TOP',
       bottomIdx: 3,
@@ -19,27 +19,15 @@ class PopularScreen extends StatelessWidget {
               SizedBox(
                 height: 50,
                 child: TabBar(
+                  indicatorColor: Colors.redAccent,
+                  labelColor: Colors.redAccent,
+                  unselectedLabelColor: Colors.grey,
                   tabs: [
-                    Text(
-                      '전체',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    Text(
-                      '비트맨',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    Text(
-                      '코인판',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    Text(
-                      '코박',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    Text(
-                      'ETC',
-                      style: TextStyle(color: Colors.black),
-                    ),
+                    Text('전체'),
+                    Text('비트맨'),
+                    Text('코인판'),
+                    Text('코박'),
+                    Text('ETC'),
                   ],
                 ),
               ),

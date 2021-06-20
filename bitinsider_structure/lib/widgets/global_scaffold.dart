@@ -17,12 +17,13 @@ class MyScaffold extends StatefulWidget {
   final TextEditingController appBarSearchCtrl;
   final ScaffoldType scaffoldType;
 
-  MyScaffold(
-      {this.body,
-      this.title,
-      this.bottomIdx,
-      this.appBarSearchCtrl,
-      this.scaffoldType});
+  MyScaffold({
+    @required this.scaffoldType,
+    @required this.title,
+    @required this.bottomIdx,
+    this.appBarSearchCtrl,
+    @required this.body,
+  });
 
   @override
   _MyScaffoldState createState() => _MyScaffoldState();
@@ -68,11 +69,11 @@ class _MyScaffoldState extends State<MyScaffold> {
         ],
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(
-              widget.scaffoldType == ScaffoldType.HOME ? 60 : 0),
+              widget.scaffoldType == ScaffoldType.SEARCH ? 60 : 0),
           child: Builder(
             builder: (BuildContext context) {
               switch (widget.scaffoldType) {
-                case ScaffoldType.HOME:
+                case ScaffoldType.SEARCH:
                   return Container(
                     // height: 30,
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
@@ -86,29 +87,27 @@ class _MyScaffoldState extends State<MyScaffold> {
                           autofocus: false,
                           controller: this.widget.appBarSearchCtrl,
                           decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              prefixIcon: Icon(
-                                Icons.search,
-                              ),
-                              contentPadding: EdgeInsets.only(left: 20),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(50)),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: orangeColor),
-                                borderRadius: BorderRadius.circular(50),
-                              )
-                              // border: OutlineInputBorder(
-                              //   borderRadius: BorderRadius.circular(50),
-                              // ),
-                              ),
+                            filled: true,
+                            fillColor: Colors.white,
+                            prefixIcon: Icon(
+                              Icons.search,
+                            ),
+                            contentPadding: EdgeInsets.only(left: 20),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: orangeColor),
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   );
-                case ScaffoldType.SUB:
+                case ScaffoldType.SELECT:
                   return Container();
-                case ScaffoldType.ETC:
+                case ScaffoldType.NONE:
                   return Container();
                 default:
                   return Container();
@@ -263,26 +262,31 @@ class _MyScaffoldState extends State<MyScaffold> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CircleAvatar(
-                            child: Center(
-                              child: Image.asset('assets/icon_bit_white.png'),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/bitinsiderNotice');
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                              child: Center(
+                                child: Image.asset('assets/icon_bit_white.png'),
+                              ),
+                              backgroundColor: orangeColor,
                             ),
-                            backgroundColor: orangeColor,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 4),
-                            child: Text(
-                              '비트인싸 공지',
-                              style: TextStyle(fontSize: 12),
-                            ),
-                          )
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.only(top: 4),
+                              child: Text(
+                                '비트인싸 공지',
+                                style: TextStyle(fontSize: 12),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                       InkWell(
-                        onTap: (){
+                        onTap: () {
                           Navigator.pushNamed(context, '/setting');
                         },
                         child: Column(
@@ -290,8 +294,8 @@ class _MyScaffoldState extends State<MyScaffold> {
                           children: [
                             CircleAvatar(
                               child: Center(
-                                child:
-                                    Image.asset('assets/icon_setting_white.png'),
+                                child: Image.asset(
+                                    'assets/icon_setting_white.png'),
                               ),
                               backgroundColor: orangeColor,
                             ),
