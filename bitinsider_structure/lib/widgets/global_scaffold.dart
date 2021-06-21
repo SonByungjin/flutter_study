@@ -6,6 +6,7 @@ import 'package:bitinsider_structure/screens/home/landing/Landing_screen.dart';
 import 'package:bitinsider_structure/screens/home/popular/popular_screen.dart';
 import 'package:bitinsider_structure/screens/home/price/price_screen.dart';
 import 'package:bitinsider_structure/screens/home/public_notice/public_notice_screen.dart';
+import 'package:bitinsider_structure/screens/sub/search/search_screen.dart';
 import 'package:bitinsider_structure/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +17,7 @@ class MyScaffold extends StatefulWidget {
   final int bottomIdx;
   final TextEditingController appBarSearchCtrl;
   final ScaffoldType scaffoldType;
+  final searchCtrl = TextEditingController();
 
   MyScaffold({
     @required this.scaffoldType,
@@ -49,6 +51,7 @@ class _MyScaffoldState extends State<MyScaffold> {
   ];
 
   String userID = '';
+  bool isSearch = false;
 
   @override
   Widget build(BuildContext context) {
@@ -82,23 +85,30 @@ class _MyScaffoldState extends State<MyScaffold> {
                       child: Theme(
                         data: Theme.of(context)
                             .copyWith(primaryColor: orangeColor),
-                        child: TextField(
-                          cursorColor: orangeColor,
-                          autofocus: false,
-                          controller: this.widget.appBarSearchCtrl,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            prefixIcon: Icon(
-                              Icons.search,
-                            ),
-                            contentPadding: EdgeInsets.only(left: 20),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: orangeColor),
-                              borderRadius: BorderRadius.circular(50),
+                        child: Focus(
+                          onFocusChange: (hasFocus){
+                            setState(() {
+                              isSearch = hasFocus;
+                            });
+                          },
+                          child: TextField(
+                            cursorColor: orangeColor,
+                            autofocus: false,
+                            controller: this.widget.searchCtrl,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              prefixIcon: Icon(
+                                Icons.search,
+                              ),
+                              contentPadding: EdgeInsets.only(left: 20),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: orangeColor),
+                                borderRadius: BorderRadius.circular(50),
+                              ),
                             ),
                           ),
                         ),
@@ -116,7 +126,9 @@ class _MyScaffoldState extends State<MyScaffold> {
           ),
         ),
       ),
-      body: this.widget.body,
+      body: isSearch
+          ? SearchScreen(searchTxtCtrl: this.widget.searchCtrl,)
+          : this.widget.body,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: widget.bottomIdx >= 0 ? widget.bottomIdx : 0,
         type: BottomNavigationBarType.fixed,
