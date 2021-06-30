@@ -10,7 +10,7 @@ class UploadPost extends PostEvent {
     UploadPost({
         @required this.title,
         @required this.content,
-        @required this.user,        
+        @required this.user,
     })
 }
 
