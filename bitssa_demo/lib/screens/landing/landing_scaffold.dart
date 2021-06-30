@@ -23,7 +23,10 @@ class _LandingScaffoldState extends State<LandingScaffold> {
           body: TabBarView(
             children: [
               Center(
-                child: Text('01'),
+                child: Text('0'),
+              ),
+              Center(
+                child: Text('1'),
               ),
               Center(
                 child: Text('2'),
@@ -33,9 +36,6 @@ class _LandingScaffoldState extends State<LandingScaffold> {
               ),
               Center(
                 child: Text('4'),
-              ),
-              Center(
-                child: Text('5'),
               ),
             ],
           ),
@@ -57,8 +57,36 @@ class _LandingScaffoldState extends State<LandingScaffold> {
               ],
             ),
           ),
+          drawer: Drawer(
+            child: BlocListener<AuthBloc AuthState>(
+              child: BlocBuilder<AuthBloc AuthState>(
+                builder: (_, state) {
+                  return: Column(
+                    children: [
+                      Container(
+                        child: Center(
+                          child: CircleAvatar()
+                        )
+                      ),
+                      Container(
+                        child: Column(
+                          children: [
+                            // 리스트뷰(CScenter, setting)
+                            Container(),
+                            // auth btn
+                            Container()
+                          ]
+                        )
+                      ),
+                    ]
+                  );
+                }
+              )
+            )
+          )
         ),
       ),
     );
   }
 }
+
