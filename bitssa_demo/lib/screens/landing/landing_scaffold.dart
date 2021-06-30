@@ -16,8 +16,7 @@ class _LandingScaffoldState extends State<LandingScaffold> {
           appBar: AppBar(
             title: Text(
               'MISS U',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
           ),
           body: TabBarView(
@@ -61,6 +60,10 @@ class _LandingScaffoldState extends State<LandingScaffold> {
             child: BlocListener<AuthBloc AuthState>(
               child: BlocBuilder<AuthBloc AuthState>(
                 builder: (_, state) {
+                  final isLogged = false;
+                  if (state is Loaded){
+                    isLogged = state.userInfo[userInfoKind.ID].length > 0;
+                  }
                   return: Column(
                     children: [
                       Container(
@@ -72,9 +75,9 @@ class _LandingScaffoldState extends State<LandingScaffold> {
                         child: Column(
                           children: [
                             // 리스트뷰(CScenter, setting)
-                            Container(),
+                            DrawerList(),
                             // auth btn
-                            Container()
+                            DrawerBtn()
                           ]
                         )
                       ),
@@ -90,3 +93,34 @@ class _LandingScaffoldState extends State<LandingScaffold> {
   }
 }
 
+class DrawerList extends StatelessWidget {
+  final List<String> drawerConstant = ['고객센터', '설정'];
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        padding: EdgeInsets.all(0),
+        itemCount: drawerConstant.length,
+        itemBuilder: (BuildContext context, int idx) {
+          return Container(
+            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+            child: Text(drawerConstant[idx]),
+          )
+        }
+      )
+    );
+  }
+}
+
+class DrawerBtn extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TextButton(),
+        SizedBox(),
+        TextButton()
+      ]
+    )
+  }
+}

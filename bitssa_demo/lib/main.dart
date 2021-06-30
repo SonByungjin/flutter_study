@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_)=> AuthBloc(AuthRepository()))
-        BlocProvider(create: (_)=> PostBloc(PostRepository()))
+        BlocProvider(create: (_)=> AuthBloc(AuthRepository())),
+        BlocProvider(create: (_)=> PostBloc(PostRepository())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
