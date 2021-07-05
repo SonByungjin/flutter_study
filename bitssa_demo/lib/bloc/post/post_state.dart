@@ -1,9 +1,11 @@
+import '../../repository/post_repository.dart';
+
 abstract class PostState {}
 
 class PostLoading extends PostState {}
 
 class PostLoaded extends PostState {
-  final List postList;
+  final List<POST> postList;
 
   PostLoaded(this.postList);
 }

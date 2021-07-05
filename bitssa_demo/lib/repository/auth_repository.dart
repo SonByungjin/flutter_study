@@ -1,28 +1,30 @@
-enum userInfoKind {
-  ID,
-  PASSWORD
+class UserInfo {
+  String id;
+  String password;
+
+  UserInfo({this.id, this.password});
 }
 
 class AuthRepository {
-  Map<userInfoKind, String> userInfo = {
-    userInfoKind.ID : '',
-    userInfoKind.PASSWORD : '',
-  };
+  UserInfo userInfo = UserInfo(
+    id: '',
+    password: '',
+  );
 
-  Future<Map<userInfoKind, String>> currentUser() async {
+  Future<UserInfo> currentUser() async {
     return userInfo;
   }
 
-  Future<Map<userInfoKind, String>> resisterUser(String id, String pw) async {
-    userInfo[userInfoKind.ID] = id;
-    userInfo[userInfoKind.PASSWORD] = pw;
+  Future<UserInfo> resisterUser(String id, String pw) async {
+    userInfo.id = id;
+    userInfo.password = pw;
 
     return userInfo;
   }
 
-  Future<Map<userInfoKind, String>> removeUser() async {
-    userInfo[userInfoKind.ID] = '';
-    userInfo[userInfoKind.PASSWORD] = '';
+  Future<UserInfo> removeUser() async {
+    userInfo.id = '';
+    userInfo.password = '';
 
     return userInfo;
   }

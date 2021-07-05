@@ -7,7 +7,6 @@ import '../../bloc/auth/auth_state.dart';
 import '../../bloc/post/post_bloc.dart';
 import '../../bloc/post/post_event.dart';
 import '../../bloc/post/post_state.dart';
-import '../../repository/auth_repository.dart';
 
 class LandingScaffold extends StatefulWidget {
   @override
@@ -81,8 +80,7 @@ class _LandingScaffoldState extends State<LandingScaffold> {
                   builder: (_, state) {
                     bool isLogged = false;
                     if (state is Loaded) {
-                      isLogged =
-                          state.userInfo[userInfoKind.ID].length > 0;
+                      isLogged = state.userInfo.id.length > 0;
                     }
                     return Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

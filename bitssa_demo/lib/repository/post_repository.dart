@@ -1,13 +1,15 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
-enum postProps {
-  TITLE,
-  CONTENT,
-  DATE,
-  USER,
+class POST {
+  final String title;
+  final String content;
+  final String date;
+  final String user;
+
+  POST({this.title, this.content, this.date, this.user});
 }
+
 
 class Album {
   final int userId;
@@ -26,18 +28,13 @@ class Album {
 }
 
 class PostRepository {
-  List<Map<postProps, String>> postList = [
-    {
-      postProps.TITLE: '',
-      postProps.CONTENT: '',
-      postProps.DATE: '',
-      postProps.USER: '',
-    },
+  List<POST> postList = [
+    POST(title: '', content: '', date: '', user: ''),
   ];
 
-  Future<List<Map<postProps, String>>> currentPost() async {
-    final response =
-        await http.get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
+  Future<List<POST>> currentPost() async {
+    final response = await http
+        .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -54,18 +51,17 @@ class PostRepository {
     return postList;
   }
 
-  Future<List<Map<postProps, String>>> addPost(
-      String title, String content, String user) async {
-    postList.add({
-      postProps.TITLE: title,
-      postProps.CONTENT: content,
-      postProps.DATE: DateTime.now().toString(),
-      postProps.USER: user,
-    });
+  Future<List<POST>> addPost(String title, String content, String user) async {
+    postList.add(POST(
+      title: title,
+      content: content,
+      date: DateTime.now().toString(),
+      user: user,
+    ));
     return postList;
   }
 
-  Future<List<Map<postProps, String>>> subtractPost(int idx) async {
+  Future<List<POST>> subtractPost(int idx) async {
     postList.removeAt(idx);
     return postList;
   }

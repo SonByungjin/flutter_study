@@ -1,9 +1,11 @@
+import '../../repository/auth_repository.dart';
+
 abstract class AuthState {}
 
 class Loading extends AuthState {}
 
 class Loaded extends AuthState {
-  final Map userInfo;
+  final UserInfo userInfo;
 
   Loaded(this.userInfo);
 }

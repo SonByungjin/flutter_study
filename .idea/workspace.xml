@@ -5,20 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8d00f6a-bd41-4772-a66e-f733a708c6e0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/flutter_study.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/flutter_study.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitssa_demo/lib/bloc/auth/auth_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/lib/bloc/auth/auth_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitssa_demo/lib/bloc/post/post_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/lib/bloc/post/post_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitssa_demo/lib/bloc/post/post_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/lib/bloc/post/post_event.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitssa_demo/lib/bloc/auth/auth_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/lib/bloc/auth/auth_state.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bitssa_demo/lib/bloc/post/post_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/lib/bloc/post/post_state.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitssa_demo/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bitssa_demo/lib/repository/auth_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/lib/repository/auth_repository.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bitssa_demo/lib/repository/post_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/lib/repository/post_repository.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitssa_demo/lib/screens/auth/singin_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/lib/screens/auth/singin_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bitssa_demo/lib/screens/landing/landing_scaffold.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/lib/screens/landing/landing_scaffold.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitssa_demo/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitssa_demo/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
