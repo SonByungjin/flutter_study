@@ -1,23 +1,21 @@
-abstract class PostEvent{}
+abstract class PostEvent {}
 
 class LandingPost extends PostEvent {}
 
 class UploadPost extends PostEvent {
-    final String title;
-    final String content;
-    final String user;
-    
-    UploadPost({
-        @required this.title,
-        @required this.content,
-        @required this.user,
-    })
+  final String title;
+  final String content;
+  final String user;
+
+  UploadPost({
+    this.title,
+    this.content,
+    this.user,
+  });
 }
 
 class DeletePost extends PostEvent {
-    final Number idx;
+  final int idx;
 
-    DeletePost({
-        @required this.idx
-    })
+  DeletePost({this.idx});
 }

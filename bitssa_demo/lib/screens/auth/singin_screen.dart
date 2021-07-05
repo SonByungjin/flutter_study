@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:bitssa_demo/bloc/auth/auth_bloc';
-import 'package:bitssa_demo/bloc/auth/auth_state';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../bloc/auth/auth_bloc.dart';
+import '../../bloc/auth/auth_event.dart';
+import '../../bloc/auth/auth_state.dart';
 
 class SignInScreen extends StatelessWidget {
   final controllerID = TextEditingController();
@@ -10,7 +12,7 @@ class SignInScreen extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       child: Expanded(
         child: Padding(
-          padding: EdgeInsets.all(50.0);
+          padding: EdgeInsets.all(50.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

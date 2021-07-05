@@ -1,8 +1,8 @@
 import 'package:bitssa_demo/routes.dart';
-import 'package:bitssa_demo/bloc/auth/auth_bloc';
-import 'package:bitssa_demo/bloc/post/post_bloc';
-import 'package:bitssa_demo/repository/auth_repository';
-import 'package:bitssa_demo/repository/post_repository';
+import 'package:bitssa_demo/bloc/auth/auth_bloc.dart';
+import 'package:bitssa_demo/bloc/post/post_bloc.dart';
+import 'package:bitssa_demo/repository/auth_repository.dart';
+import 'package:bitssa_demo/repository/post_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

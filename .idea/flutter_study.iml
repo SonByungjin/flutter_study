@@ -3,6 +3,10 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/bitinsider_structure/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/bitinsider_structure/build" />
+      <excludeFolder url="file://$MODULE_DIR$/bitssa_demo/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/bitssa_demo/build" />
       <excludeFolder url="file://$MODULE_DIR$/caculate_textslider/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/caculate_textslider/build" />
       <excludeFolder url="file://$MODULE_DIR$/flashcard/.pub" />

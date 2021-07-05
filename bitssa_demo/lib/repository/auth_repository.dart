@@ -4,12 +4,12 @@ enum userInfoKind {
 }
 
 class AuthRepository {
-  Map<userInfoKind, String> userInfo {
+  Map<userInfoKind, String> userInfo = {
     userInfoKind.ID : '',
     userInfoKind.PASSWORD : '',
-  }
+  };
 
-  Future<Map<userInfoKind, String>> currentUser async {
+  Future<Map<userInfoKind, String>> currentUser() async {
     return userInfo;
   }
 

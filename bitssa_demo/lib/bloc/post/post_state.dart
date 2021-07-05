@@ -1,15 +1,15 @@
 abstract class PostState {}
 
-class Loading extends PostState {}
+class PostLoading extends PostState {}
 
-class Loaded extends PostState {
-    final List postList;
+class PostLoaded extends PostState {
+  final List postList;
 
-    Loaded(this.postList);
+  PostLoaded(this.postList);
 }
 
-class Error extends PostState {
-    final String message;
+class PostError extends PostState {
+  final String message;
 
-    Error(this.message);
+  PostError(this.message);
 }

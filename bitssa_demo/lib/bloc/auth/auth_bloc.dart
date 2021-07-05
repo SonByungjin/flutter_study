@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bitssa_demo/bloc/auth/auth_event';
-import 'package:bitssa_demo/bloc/auth/auth_state';
+import 'package:bitssa_demo/bloc/auth/auth_event.dart';
+import 'package:bitssa_demo/bloc/auth/auth_state.dart';
+import '../../repository/auth_repository.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState>{
   final AuthRepository repository;
