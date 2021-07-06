@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8d00f6a-bd41-4772-a66e-f733a708c6e0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/bitssa_demo/lib/screens/landing/landing_widgets/post_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitssa_demo/lib/bloc/auth/auth_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/lib/bloc/auth/auth_state.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitssa_demo/lib/bloc/post/post_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/lib/bloc/post/post_state.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitssa_demo/lib/repository/auth_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/lib/repository/auth_repository.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitssa_demo/lib/bloc/post/post_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/lib/bloc/post/post_bloc.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bitssa_demo/lib/repository/post_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/lib/repository/post_repository.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitssa_demo/lib/routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/lib/routes.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitssa_demo/lib/screens/auth/singin_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/lib/screens/auth/singin_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bitssa_demo/lib/screens/landing/landing_scaffold.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bitssa_demo/lib/screens/landing/landing_scaffold.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,5 +53,9 @@
       <screen x="0" y="25" width="1792" height="1017" />
     </state>
     <state x="189" y="199" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.25.1792.1017@0.25.1792.1017" timestamp="1623229652763" />
+    <state x="492" y="299" width="597" height="490" key="find.popup" timestamp="1625565000620">
+      <screen x="0" y="25" width="1792" height="1019" />
+    </state>
+    <state x="492" y="299" width="597" height="490" key="find.popup/0.25.1792.1019@0.25.1792.1019" timestamp="1625565000620" />
   </component>
 </project>

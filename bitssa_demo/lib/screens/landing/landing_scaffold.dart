@@ -1,3 +1,4 @@
+import 'package:bitssa_demo/screens/landing/landing_widgets/post_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bitssa_demo/bloc/auth/auth_bloc.dart';
@@ -5,7 +6,6 @@ import 'package:bitssa_demo/bloc/auth/auth_state.dart';
 import '../../bloc/auth/auth_bloc.dart';
 import '../../bloc/auth/auth_state.dart';
 import '../../bloc/post/post_bloc.dart';
-import '../../bloc/post/post_event.dart';
 import '../../bloc/post/post_state.dart';
 
 class LandingScaffold extends StatefulWidget {
@@ -15,10 +15,6 @@ class LandingScaffold extends StatefulWidget {
 
 class _LandingScaffoldState extends State<LandingScaffold> {
   @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<PostBloc>(context).add(LandingPost());
-  }
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 5,
@@ -29,8 +25,8 @@ class _LandingScaffoldState extends State<LandingScaffold> {
               iconTheme: IconThemeData(color: Colors.white),
               title: Text(
                 'MISS U',
-                style: TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.bold),
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
             ),
             body: TabBarView(
@@ -48,9 +44,7 @@ class _LandingScaffoldState extends State<LandingScaffold> {
                 Center(
                   child: Text('2'),
                 ),
-                Center(
-                  child: Text('3'),
-                ),
+                PostScreen(),
                 Center(
                   child: Text('4'),
                 ),
@@ -76,6 +70,15 @@ class _LandingScaffoldState extends State<LandingScaffold> {
             ),
             drawer: Drawer(
               child: BlocListener<AuthBloc, AuthState>(
+                listener: (context, state) {
+                  if (state is Error) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(state.message),
+                      ),
+                    );
+                  }
+                },
                 child: BlocBuilder<AuthBloc, AuthState>(
                   builder: (_, state) {
                     bool isLogged = false;
@@ -87,28 +90,20 @@ class _LandingScaffoldState extends State<LandingScaffold> {
                         children: [
                           Container(
                               height: 150,
-                              child: Center(
-                                  child: CircleAvatar()
-                              )
-                          ),
+                              child: Center(child: CircleAvatar())),
                           Container(
                               height: MediaQuery.of(context).size.height - 300,
-                              child: Column(
-                                  children: [
-                                    // 리스트뷰(CScenter, setting)
-                                    DrawerList(),
-                                    // auth btn
-                                    DrawerBtn()
-                                  ]
-                              )
-                          ),
-                        ]
-                    );
+                              child: Column(children: [
+                                // 리스트뷰(CScenter, setting)
+                                DrawerList(),
+                                // auth btn
+                                DrawerBtn(isLogged)
+                              ])),
+                        ]);
                   },
                 ),
               ),
-            )
-        ),
+            )),
       ),
     );
   }
@@ -124,26 +119,33 @@ class DrawerList extends StatelessWidget {
             padding: EdgeInsets.all(0),
             itemCount: drawerConstant.length,
             itemBuilder: (BuildContext context, int idx) {
-              print(drawerConstant[idx]);
               return Container(
                 margin: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
                 child: Text(drawerConstant[idx]),
               );
-            }
-        )
-    );
+            }));
   }
 }
 
 class DrawerBtn extends StatelessWidget {
+  final bool isLogged;
+
+  DrawerBtn(this.isLogged);
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-        children: [
-          TextButton(child: Text('로그인'),),
-          SizedBox(),
-          TextButton(child: Text('회원가입'),)
-        ]
-    );
+    return Column(children: [
+      TextButton(
+        child: Text(isLogged ? '로그아웃' : '로그인'),
+        onPressed: () {
+          Navigator.pushNamed(context, '/signIn');
+        },
+      ),
+      SizedBox(),
+      TextButton(
+        child: Text(isLogged ? '마이페이지' : '회원가입'),
+        onPressed: () {},
+      )
+    ]);
   }
 }

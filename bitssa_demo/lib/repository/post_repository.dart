@@ -8,28 +8,20 @@ class POST {
   final String user;
 
   POST({this.title, this.content, this.date, this.user});
-}
 
-
-class Album {
-  final int userId;
-  final int id;
-  final String title;
-
-  Album({this.userId, this.id, this.title});
-
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      userId: json['userId'],
-      id: json['id'],
-      title: json['title'],
+  factory POST.fromJson(Map<String, dynamic> json) {
+    return POST(
+      title: json['title'].toString(),
+      content: json['id'].toString(),
+      date: DateTime.now().toString(),
+      user: json['id'].toString(),
     );
   }
 }
 
 class PostRepository {
   List<POST> postList = [
-    POST(title: '', content: '', date: '', user: ''),
+    POST(title: '제목', content: '내용', date: '날짜', user: '유저'),
   ];
 
   Future<List<POST>> currentPost() async {
@@ -37,15 +29,9 @@ class PostRepository {
         .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
 
     if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      final rsp = Album.fromJson(jsonDecode(response.body));
-      print(rsp.userId);
-      print(rsp.id);
-      print(rsp.title);
+      final rsp = POST.fromJson(jsonDecode(response.body));
+      postList.add(rsp);
     } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
       throw Exception('Failed to load album');
     }
     return postList;
