@@ -17,9 +17,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_)=> AuthBloc(AuthRepository()))
-      ],
+      providers: [BlocProvider(create: (_) => AuthBloc(AuthRepository()))],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Bitinsider_structure',
@@ -29,4 +27,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
